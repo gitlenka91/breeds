@@ -23,7 +23,7 @@ export class ListItemComponent {
     
     // Additionally we might want to implement some loading animation while the response comes from API.
     // That could be handled purely through HTML - depending if this.image is undefined or not.
-    this.dataService.getBreedDetails(id).subscribe(data => {
+    this.dataService.getBreedDetails(id).pipe(take(1)).subscribe(data => {
       this.breedDetail = data;
     });
   }
