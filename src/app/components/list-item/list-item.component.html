@@ -1,0 +1,30 @@
+<div class="list-item">
+    <div class="item" [ngClass]="{'active': show}">
+        <h2>{{name}}</h2>
+        <button type="button" (click)="showDetails(id)">
+            {{show ? 'Close' : 'Show more'}}
+        </button>
+    </div>
+    <div *ngIf="show && breedDetail" class="detail">
+        <!-- breedDetail?.breeds[0] could be shortened if we want, e.g. we could define own object in .ts -->
+        <img [src]="breedDetail?.url" [alt]="breedDetail?.breeds[0].name">
+        <div class="description">
+            <p *ngIf="breedDetail?.breeds[0].description; else noDescription">
+                {{breedDetail?.breeds[0].description}}
+            </p>
+            <ng-template #noDescription>
+                <p>We do not have more information about this breed for now.</p>
+            </ng-template>
+            <div class="stats">
+                <div>
+                    <span class="legend">Lifespan</span>
+                    <p>{{breedDetail?.breeds[0].life_span || 'Unknown'}}</p>
+                </div>
+                <div>
+                    <span class="legend">Origin</span>
+                    <p>{{breedDetail?.breeds[0].origin || 'Unknown'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
